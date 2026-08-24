@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d0d12">
+<title>오늘의 F1 브리핑 · 2026-08-24</title>
+<meta name="description" content="해외 F1 매체의 주요 기사를 한국어 3줄 요약과 원문 링크로 전합니다.">
+<style>
+:root {
+  --bg: #0d0d12;
+  --card: #17171f;
+  --card-2: #1e1e28;
+  --border: #262632;
+  --text: #f4f4f7;
+  --muted: #8b8b9c;
+  --dim: #5f5f70;
+  --accent: #7b5cfa;
+  --accent-soft: rgba(123, 92, 250, 0.16);
+  --bbc: #ff5a5a;
+  --autosport: #ffb020;
+  --therace: #4ecdc4;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 56px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+               "Pretendard", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  line-height: 1.65; color: var(--text); background: var(--bg);
+  -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 620px; margin: 0 auto; }
+
+header { padding: 44px 0 4px; }
+h1 { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; }
+.date { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+.sources { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--border); color: #c9c9d6;
+}
+.chip i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.chip[data-s="BBC Sport"] i { background: var(--bbc); }
+.chip[data-s="Autosport"] i { background: var(--autosport); }
+.chip[data-s="The Race"] i { background: var(--therace); }
+
+.section {
+  display: flex; align-items: center; gap: 8px;
+  margin: 32px 0 4px; font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+}
+.section .mark {
+  display: grid; place-items: center; width: 26px; height: 26px;
+  border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-size: 14px;
+}
+
+.shortfall {
+  margin: 18px 0 0; padding: 13px 15px; border-radius: 12px; font-size: 14px;
+  background: rgba(255, 176, 32, 0.09); border: 1px solid rgba(255, 176, 32, 0.28);
+  color: #f0bc63;
+}
+
+.card {
+  display: grid; grid-template-columns: 34px 1fr; gap: 14px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  padding: 20px 18px; margin: 14px 0;
+}
+.rank {
+  font-size: 19px; font-weight: 800; color: var(--dim);
+  letter-spacing: -0.02em; line-height: 1.5; font-variant-numeric: tabular-nums;
+}
+.meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12.5px; }
+.source { font-weight: 700; letter-spacing: 0.01em; }
+.source[data-s="BBC Sport"] { color: var(--bbc); }
+.source[data-s="Autosport"] { color: var(--autosport); }
+.source[data-s="The Race"] { color: var(--therace); }
+.dot { width: 3px; height: 3px; border-radius: 50%; background: var(--dim); }
+.time { color: var(--muted); }
+
+.card h2 {
+  margin: 10px 0 6px; font-size: 19px; font-weight: 700;
+  line-height: 1.4; letter-spacing: -0.02em;
+}
+.title-en { margin: 0 0 14px; font-size: 13px; color: var(--dim); line-height: 1.5; }
+
+.summary { margin: 0; padding: 0; list-style: none; }
+.summary li {
+  position: relative; padding-left: 15px; margin-bottom: 8px;
+  font-size: 14.5px; color: #d3d3dd;
+}
+.summary li:last-child { margin-bottom: 0; }
+.summary li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+.actions {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--border);
+}
+.origin {
+  font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none;
+  margin-right: auto;
+}
+.origin:hover { text-decoration: underline; }
+.vote {
+  font: inherit; font-size: 15px; line-height: 1; cursor: pointer;
+  padding: 8px 13px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--card-2); color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.vote:hover { background: #262633; }
+.vote[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.vote:disabled { cursor: default; opacity: 0.35; }
+.vote[aria-pressed="true"]:disabled { opacity: 1; }
+
+footer {
+  margin-top: 40px; padding: 22px 18px; border-radius: 18px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 12.5px; color: var(--muted); line-height: 1.7;
+}
+footer h2 { font-size: 13px; margin: 0 0 12px; color: var(--text); font-weight: 700; }
+footer ul { margin: 0; padding-left: 16px; }
+footer li { margin-bottom: 8px; }
+footer li:last-child { margin-bottom: 0; }
+footer a { color: var(--accent); }
+footer strong { color: #d3d3dd; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>오늘의 F1 브리핑</h1>
+      <p class="date">2026-08-24</p>
+      <div class="sources">
+        <span class="chip" data-s="BBC Sport"><i></i>BBC Sport</span>
+        <span class="chip" data-s="Autosport"><i></i>Autosport</span>
+        <span class="chip" data-s="The Race"><i></i>The Race</span>
+      </div>
+    </header>
+    <main>
+      <p class="section"><span class="mark">🔥</span>오늘의 기사 5건</p>
+
+      <article class="card" data-article-id="d2531cdc067b7eb8">
+        <div class="rank">01</div>
+        <div>
+          <div class="meta">
+            <span class="source" data-s="BBC Sport">BBC Sport</span>
+            <span class="dot"></span>
+            <span class="time">08월 24일 05:29 KST</span>
+          </div>
+          <h2>노리스, 안토넬리 제치고 네덜란드 GP 우승</h2>
+          <p class="title-en">Norris beats Antonelli to claim final Dutch GP win</p>
+          <ul class="summary">
+            <li>맥라렌의 랜도 노리스가 네덜란드 그랑프리에서 우승을 차지했다.</li>
+            <li>노리스는 뛰어난 경주 전략을 앞세워 메르세데스의 키미 안토넬리를 제쳤다.</li>
+            <li>치열한 경기 끝에 맥라렌이 전략적 승리를 가져갔다.</li>
+          </ul>
+          <div class="actions">
+            <a class="origin" href="https://www.bbc.co.uk/sport/formula1/articles/ce8l8jek1k1o" target="_blank" rel="noopener noreferrer">원문 보기 &rarr;</a>
+            <button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="도움이 됐어요">👍</button>
+            <button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="도움이 안 됐어요">👎</button>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-article-id="a165f012f0ed4843">
+        <div class="rank">02</div>
+        <div>
+          <div class="meta">
+            <span class="source" data-s="BBC Sport">BBC Sport</span>
+            <span class="dot"></span>
+            <span class="time">08월 24일 04:23 KST</span>
+          </div>
+          <h2>노리스 &quot;연속 우승에도 챔피언십 도전 차 부족해&quot;</h2>
+          <p class="title-en">Norris and McLaren &#x27;don&#x27;t have car&#x27; to fight for title</p>
+          <ul class="summary">
+            <li>랜도 노리스가 챔피언십에 도전하기엔 경주차 성능이 부족하다고 평가했다.</li>
+            <li>노리스는 네덜란드 그랑프리에서 시즌 2연승을 거둔 직후 이같이 말했다.</li>
+            <li>그는 우승에도 불구하고 타이틀 경쟁에 필요한 성능을 갖추지 못했다고 강조했다.</li>
+          </ul>
+          <div class="actions">
+            <a class="origin" href="https://www.bbc.co.uk/sport/formula1/articles/c1e1e56q4w5o" target="_blank" rel="noopener noreferrer">원문 보기 &rarr;</a>
+            <button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="도움이 됐어요">👍</button>
+            <button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="도움이 안 됐어요">👎</button>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-article-id="0c5a9e9938b03690">
+        <div class="rank">03</div>
+        <div>
+          <div class="meta">
+            <span class="source" data-s="Autosport">Autosport</span>
+            <span class="dot"></span>
+            <span class="time">08월 24일 03:38 KST</span>
+          </div>
+          <h2>페르스타펀, 네덜란드 GP 첫 바퀴 충돌 사고…본인 실수 인정</h2>
+          <p class="title-en">FIA explains safety car formation lap after F1 driver criticism at Dutch GP</p>
+          <ul class="summary">
+            <li>네덜란드 그랑프리 첫 바퀴에서 우천으로 인한 대형 충돌 사고가 발생했다.</li>
+            <li>레드불의 막스 페르스타펀이 마지막 코너 탈출 중 크게 충돌했다.</li>
+            <li>페르스타펀은 노면 상태와 가속 타이밍을 잘못 판단한 본인 과실이라고 인정했다.</li>
+          </ul>
+          <div class="actions">
+            <a class="origin" href="https://www.autosport.com/f1/news/it-made-no-sense-f1-drivers-question-safety-car-formation-lap-after-early-dutch-gp-chaos/10848760/" target="_blank" rel="noopener noreferrer">원문 보기 &rarr;</a>
+            <button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="도움이 됐어요">👍</button>
+            <button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="도움이 안 됐어요">👎</button>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-article-id="9b3915b6bd317c90">
+        <div class="rank">04</div>
+        <div>
+          <div class="meta">
+            <span class="source" data-s="BBC Sport">BBC Sport</span>
+            <span class="dot"></span>
+            <span class="time">08월 24일 03:10 KST</span>
+          </div>
+          <h2>토토 볼프 &quot;메르세데스, 라이벌 추격할 자금 부족&quot;</h2>
+          <p class="title-en">Mercedes lack money to develop car like rivals - Wolff</p>
+          <ul class="summary">
+            <li>메르세데스의 토토 볼프 대표가 경주차 개발 자금이 부족하다고 밝혔다.</li>
+            <li>볼프 대표는 챔피언십 라이벌 팀들과 같은 속도로 차량을 개발할 예산이 없다고 말했다.</li>
+            <li>메르세데스는 경쟁팀들의 개발 속도를 따라가는 데 난항을 겪고 있다.</li>
+          </ul>
+          <div class="actions">
+            <a class="origin" href="https://www.bbc.co.uk/sport/formula1/articles/cx2k2kkd9ero" target="_blank" rel="noopener noreferrer">원문 보기 &rarr;</a>
+            <button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="도움이 됐어요">👍</button>
+            <button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="도움이 안 됐어요">👎</button>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-article-id="3fc39489dc260ecb">
+        <div class="rank">05</div>
+        <div>
+          <div class="meta">
+            <span class="source" data-s="Autosport">Autosport</span>
+            <span class="dot"></span>
+            <span class="time">08월 24일 02:03 KST</span>
+          </div>
+          <h2>해밀턴, 페라리 팀 오더 불만 폭발… 4위 마감</h2>
+          <p class="title-en">Hamilton explains Dutch GP radio outburst over Ferrari team orders</p>
+          <ul class="summary">
+            <li>루이스 해밀턴이 페라리에 메르세데스와 같은 효율성을 갖추라고 촉구했다.</li>
+            <li>해밀턴은 경기 중 샤를 레클레르와의 경쟁에서 팀 오더 부재에 분통을 터뜨렸다.</li>
+            <li>네덜란드 GP에서 4위를 기록한 그는 무전으로 답답한 심경을 표출했다.</li>
+          </ul>
+          <div class="actions">
+            <a class="origin" href="https://www.autosport.com/f1/news/lewis-hamilton-explains-dutch-gp-radio-outburst-over-team-orders/10848705/" target="_blank" rel="noopener noreferrer">원문 보기 &rarr;</a>
+            <button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="도움이 됐어요">👍</button>
+            <button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="도움이 안 됐어요">👎</button>
+          </div>
+        </div>
+      </article>
+    </main>
+    <footer>
+<h2>안내</h2>
+<ul>
+  <li>본 서비스는 Formula 1, FIA, Formula One World Championship Limited 및 각 매체와 아무런 제휴 관계가 없는 비공식·개인 프로젝트입니다.</li>
+  <li>F1&reg;, FORMULA 1&reg; 등은 Formula One Licensing B.V.의 등록 상표입니다.</li>
+  <li>모든 기사의 저작권은 각 매체에 있습니다. 본 서비스는 원문을 제공하지 않으며, AI가 생성한 짧은 한국어 요약과 원문 링크만 제공합니다.</li>
+  <li>요약은 AI가 자동 생성한 것으로 오역&middot;오류가 있을 수 있습니다. <strong>정확한 내용은 반드시 원문을 확인해 주세요.</strong></li>
+  <li>게재 중단을 원하는 매체는 <a href="mailto:jiwon0410@gmail.com">jiwon0410@gmail.com</a>로 알려주시면 즉시 조치하겠습니다.</li>
+</ul>
+    </footer>
+  </div>
+<script>
+var SUPABASE_URL = "https://ajtunciuelmvulcqiata.supabase.co";
+var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqdHVuY2l1ZWxtdnVsY3FpYXRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0ODg5NDAsImV4cCI6MjEwMzA2NDk0MH0.9uJpzc8EunOF2SG0t-0vLBq-9QKMGRFbK5s6dQVBru0";
+var DIGEST_DATE = "2026-08-24";
+var STORAGE_KEY = "f1brief.votes";
+
+function readVotes() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+
+function writeVotes(votes) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(votes)); }
+  catch (e) { /* 사생활 보호 모드 등. 기록만 못 할 뿐 동작은 계속한다. */ }
+}
+
+// 중복 투표 방지는 localStorage 로만 한다. 완벽하지 않아도 MVP 엔 충분하다.
+function lock(card, vote) {
+  card.querySelectorAll(".vote").forEach(function (button) {
+    button.disabled = true;
+    button.setAttribute("aria-pressed", String(Number(button.dataset.vote) === vote));
+  });
+}
+
+function send(articleId, vote) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return;  // 미연결 상태에서는 전송하지 않는다
+  fetch(SUPABASE_URL + "/rest/v1/feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({
+      digest_date: DIGEST_DATE,
+      article_id: articleId,
+      vote: vote
+    })
+  }).catch(function () { /* 실패해도 화면은 그대로 둔다 */ });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var votes = readVotes();
+
+  document.querySelectorAll(".card").forEach(function (card) {
+    var articleId = card.dataset.articleId;
+    if (articleId in votes) lock(card, votes[articleId]);
+
+    card.querySelectorAll(".vote").forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (articleId in votes) return;
+        var vote = Number(button.dataset.vote);
+        votes[articleId] = vote;
+        writeVotes(votes);
+        lock(card, vote);
+        send(articleId, vote);
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
