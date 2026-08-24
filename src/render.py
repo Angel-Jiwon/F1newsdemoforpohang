@@ -15,7 +15,9 @@ DOCS = ROOT / "docs"
 ARCHIVE = DOCS / "archive"
 
 KST = timezone(timedelta(hours=9))
-CONTACT = "jiwon0410@gmail.com"
+# 공개 페이지라 개인 이메일 대신 저장소 이슈 창구를 쓴다.
+CONTACT_URL = "https://github.com/Angel-Jiwon/F1newsdemoforpohang/issues"
+CONTACT_LABEL = "GitHub Issues"
 
 # 👍/👎 저장소. 값은 환경변수로만 받는다 (코딩 규칙: 키를 커밋하지 않는다).
 #   SUPABASE_URL       = https://<project-ref>.supabase.co
@@ -31,7 +33,7 @@ DISCLAIMER = f"""<h2>안내</h2>
   <li>F1&reg;, FORMULA 1&reg; 등은 Formula One Licensing B.V.의 등록 상표입니다.</li>
   <li>모든 기사의 저작권은 각 매체에 있습니다. 본 서비스는 원문을 제공하지 않으며, AI가 생성한 짧은 한국어 요약과 원문 링크만 제공합니다.</li>
   <li>요약은 AI가 자동 생성한 것으로 오역&middot;오류가 있을 수 있습니다. <strong>정확한 내용은 반드시 원문을 확인해 주세요.</strong></li>
-  <li>게재 중단을 원하는 매체는 <a href="mailto:{CONTACT}">{CONTACT}</a>로 알려주시면 즉시 조치하겠습니다.</li>
+  <li>게재 중단을 원하는 매체는 <a href="{CONTACT_URL}" target="_blank" rel="noopener noreferrer">{CONTACT_LABEL}</a>로 알려주시면 즉시 조치하겠습니다.</li>
 </ul>"""
 
 STYLE = """
