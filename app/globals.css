@@ -181,3 +181,19 @@ a { color: inherit; text-decoration: none; }
 
 .empty { padding: 60px 24px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.7; white-space: pre-line; }
 .footer { padding: 26px 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+/* ── 쿠키 동의 배너 ────────────────────────── */
+.consent {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  width: min(452px, calc(100% - 28px));
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(17, 19, 21, 0.14);
+  z-index: 50;
+}
+.consent p { margin: 0 0 12px; font-size: 13px; line-height: 1.6; color: #4a4e55; }
