@@ -17,16 +17,25 @@ export type Article = {
   analysis: Analysis | null;
 };
 
-const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!, {
+/**
+ * Vercel 의 Supabase 통합이 SUPABASE_URL / SUPABASE_ANON_KEY 를 자기 프로젝트 값으로
+ * 덮어쓴다. 덮어쓰이지 않는 이름을 먼저 보고, 없으면 기존 이름으로 떨어진다
+ * (로컬 .env 는 그대로 두고 쓸 수 있다).
+ */
+const SUPABASE_URL = process.env.F1_SUPABASE_URL || process.env.SUPABASE_URL || "";
+const SUPABASE_ANON_KEY = process.env.F1_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || "";
+
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: false },
 });
 
 // 진단용. 배포 환경이 어느 Supabase 프로젝트에 붙는지 에러 메시지로 확인한다.
 // 원인이 잡히면 제거한다.
 const TARGET = (() => {
-  const url = process.env.SUPABASE_URL ?? "";
-  const host = url.includes("supabase.co") ? url.replace(/^https?:\/\//, "").split(".")[0] : "(URL 없음)";
-  return `${host} / key ${String(process.env.SUPABASE_ANON_KEY ?? "").length}자`;
+  const host = SUPABASE_URL.includes("supabase.co")
+    ? SUPABASE_URL.replace(/^https?:\/\//, "").split(".")[0]
+    : "(URL 없음)";
+  return `${host} / key ${SUPABASE_ANON_KEY.length}자`;
 })();
 
 /** 화면에 올리는 기사 수. 후보는 이보다 넉넉히 모은다 —
