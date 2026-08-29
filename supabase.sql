@@ -20,9 +20,10 @@ create table if not exists articles (
 create index if not exists articles_brief_date_idx on articles (brief_date desc, published desc);
 
 -- 반응 로그. 되돌리기·중복 제거는 하지 않는다(append-only). 집계할 때 세션 기준으로 추리면 된다.
+-- kind = 'visit' 은 지표의 분모다. 목록 화면을 본 브라우저가 하루 한 번 남긴다.
 create table if not exists reactions (
   id         bigint generated always as identity primary key,
-  kind       text not null check (kind in ('article', 'revisit', 'missing')),
+  kind       text not null check (kind in ('article', 'revisit', 'missing', 'visit')),
   article_id text,                    -- kind = 'article' 일 때만
   value      text check (value in ('up', 'down')),
   note       text,                    -- kind = 'missing' 일 때 자유 입력
@@ -48,8 +49,22 @@ create policy articles_update on articles  for update using (true) with check (t
 create policy reactions_write on reactions for insert with check (true);
 create policy reactions_read  on reactions for select using (true);
 
--- 지표 확인용 (실험 끝나고 SQL Editor 에서 실행)
---   select value, count(*) from reactions where kind = 'revisit' group by value;
---   select a.source, r.value, count(*) from reactions r join articles a on a.id = r.article_id
---     where r.kind = 'article' group by 1, 2 order by 1;
---   select note from reactions where kind = 'missing' and note <> '';
+-- ── 지표 확인용 (SQL Editor 에서 그대로 실행) ─────────────────────────────
+-- Primary: 방문 대비 '내일도 열어보겠다' 클릭 비율. 기준 60%.
+--   select
+--     count(distinct session_id) filter (where kind = 'visit')                      as 방문,
+--     count(distinct session_id) filter (where kind = 'revisit' and value = 'up')   as 열어보겠다,
+--     count(distinct session_id) filter (where kind = 'revisit' and value = 'down') as 아니다,
+--     round(100.0 * count(distinct session_id) filter (where kind = 'revisit' and value = 'up')
+--           / nullif(count(distinct session_id) filter (where kind = 'visit'), 0), 1) as 비율
+--   from reactions where brief_date = current_date;
+--
+-- Supporting: 매체별 👍 분포
+--   select a.source, r.value, count(distinct r.session_id)
+--   from reactions r join articles a on a.id = r.article_id
+--   where r.kind = 'article' and r.brief_date = current_date
+--   group by 1, 2 order by 1;
+--
+-- Supporting: '빠진 소식' 자유 응답
+--   select created_at, session_id, note from reactions
+--   where kind = 'missing' and brief_date = current_date order by created_at;

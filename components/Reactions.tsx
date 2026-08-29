@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /** 세션 식별자. 같은 사람의 클릭을 묶기 위한 것으로, 개인정보는 담지 않는다. */
 function sessionId(): string {
@@ -53,13 +53,37 @@ export function ArticleVote({ articleId }: { articleId: string }) {
   );
 }
 
-/** Primary 지표: '내일도 열어보겠다' 클릭 비율. */
-export function RevisitAsk() {
+/**
+ * Primary 지표: 방문 대비 '내일도 열어보겠다' 클릭 비율.
+ *
+ * 분모를 만들려면 누른 사람뿐 아니라 **본 사람**도 기록해야 한다.
+ * 목록 화면이 뜨면 그날 1회 visit 행을 남긴다(같은 브라우저는 하루 한 번).
+ */
+export function RevisitAsk({ briefDate }: { briefDate: string }) {
   const [vote, setVote] = useState<Vote>(null);
+
+  useEffect(() => {
+    try {
+      const visitKey = `f1-visit-${briefDate}`;
+      if (!localStorage.getItem(visitKey)) {
+        localStorage.setItem(visitKey, "1"); // 먼저 찍는다. 개발 모드의 이중 실행까지 막는다.
+        void send({ kind: "visit" });
+      }
+      const saved = localStorage.getItem(`f1-revisit-${briefDate}`);
+      if (saved === "up" || saved === "down") setVote(saved);
+    } catch {
+      // localStorage 를 못 쓰는 브라우저에서는 방문 기록을 남기지 않는다.
+    }
+  }, [briefDate]);
 
   function cast(value: "up" | "down") {
     if (vote) return;
     setVote(value);
+    try {
+      localStorage.setItem(`f1-revisit-${briefDate}`, value);
+    } catch {
+      // 저장이 안 돼도 클릭 자체는 기록한다. 집계는 session_id 기준으로 중복을 걷어낸다.
+    }
     void send({ kind: "revisit", value });
   }
 

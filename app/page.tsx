@@ -36,12 +36,14 @@ export default async function Home() {
     console.error("[page]", error);
   }
 
+  const date = today();
+
   return (
     <>
       <header className="topbar">
         <h1>오늘의 F1</h1>
         <span className="spacer" />
-        <span className="date">{koDate(today())}</span>
+        <span className="date">{koDate(date)}</span>
       </header>
 
       <div className="chips">
@@ -71,7 +73,7 @@ export default async function Home() {
 
       {articles.length > 0 && (
         <>
-          <RevisitAsk />
+          <RevisitAsk briefDate={date} />
           <MissingAsk />
         </>
       )}

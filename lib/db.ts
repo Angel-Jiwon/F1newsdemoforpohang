@@ -173,7 +173,7 @@ async function relatedArticles(article: Article): Promise<Article[]> {
 }
 
 export type ReactionInput = {
-  kind: "article" | "revisit" | "missing";
+  kind: "article" | "revisit" | "missing" | "visit";
   articleId?: string | null;
   value?: "up" | "down" | null;
   note?: string | null;

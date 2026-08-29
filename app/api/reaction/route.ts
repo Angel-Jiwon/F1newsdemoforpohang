@@ -13,10 +13,13 @@ export async function POST(request: Request) {
   const value = body.value;
   const sessionId = typeof body.sessionId === "string" ? body.sessionId.slice(0, 64) : "";
 
-  if (kind !== "article" && kind !== "revisit" && kind !== "missing") {
+  const KINDS = ["article", "revisit", "missing", "visit"] as const;
+  if (typeof kind !== "string" || !KINDS.includes(kind as (typeof KINDS)[number])) {
     return NextResponse.json({ error: "kind 가 올바르지 않다" }, { status: 400 });
   }
-  if (kind !== "missing" && value !== "up" && value !== "down") {
+  // visit(방문 기록)과 missing(자유 응답)에는 up/down 이 없다.
+  const needsValue = kind === "article" || kind === "revisit";
+  if (needsValue && value !== "up" && value !== "down") {
     return NextResponse.json({ error: "value 가 올바르지 않다" }, { status: 400 });
   }
   if (!sessionId) {
@@ -25,9 +28,9 @@ export async function POST(request: Request) {
 
   try {
     await saveReaction({
-      kind,
+      kind: kind as "article" | "revisit" | "missing" | "visit",
       articleId: kind === "article" ? String(body.articleId ?? "").slice(0, 64) || null : null,
-      value: kind === "missing" ? null : (value as "up" | "down"),
+      value: needsValue ? (value as "up" | "down") : null,
       note: kind === "missing" ? String(body.note ?? "").slice(0, 500) : null,
       sessionId,
     });
