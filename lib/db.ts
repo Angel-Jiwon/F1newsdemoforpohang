@@ -21,6 +21,14 @@ const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY
   auth: { persistSession: false },
 });
 
+// 진단용. 배포 환경이 어느 Supabase 프로젝트에 붙는지 에러 메시지로 확인한다.
+// 원인이 잡히면 제거한다.
+const TARGET = (() => {
+  const url = process.env.SUPABASE_URL ?? "";
+  const host = url.includes("supabase.co") ? url.replace(/^https?:\/\//, "").split(".")[0] : "(URL 없음)";
+  return `${host} / key ${String(process.env.SUPABASE_ANON_KEY ?? "").length}자`;
+})();
+
 /** 화면에 올리는 기사 수. 후보는 이보다 넉넉히 모은다 —
  * 정보가 부족한 기사는 요약 단계에서 탈락하기 때문이다. */
 const BRIEF_SIZE = 5;
@@ -53,7 +61,7 @@ async function readBriefing(date: string): Promise<Article[]> {
     .select("*")
     .eq("brief_date", date)
     .order("published", { ascending: false });
-  if (error) throw new Error(`articles 조회 실패: ${error.message}`);
+  if (error) throw new Error(`articles 조회 실패: ${error.message} — 접속 대상: ${TARGET}`);
   return (data ?? []).map(toArticle);
 }
 
