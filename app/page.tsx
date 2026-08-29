@@ -46,12 +46,6 @@ export default async function Home() {
 
       <div className="chips">
         <span className="chip active">🏁 오늘의 브리핑</span>
-        {SOURCES.map((s) => (
-          <span key={s.name} className="chip">
-            <span className="dot" style={{ background: s.accent }} />
-            {s.name}
-          </span>
-        ))}
       </div>
 
       {articles.length === 0 ? (

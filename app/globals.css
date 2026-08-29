@@ -76,7 +76,7 @@ a { color: inherit; text-decoration: none; }
   color: #55595f;
 }
 .chip.active { background: var(--fg); color: #fff; }
-.chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
 
 /* ── 기사 목록 ─────────────────────────────── */
 .list { border-top: 1px solid var(--line); }
@@ -111,18 +111,19 @@ a { color: inherit; text-decoration: none; }
 .article { padding: 20px; }
 .sourcepill {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px 7px 8px;
+  gap: 6px 12px;
+  padding: 8px 15px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 18px;
   font-size: 13px;
-  font-weight: 600;
-  color: #55595f;
+  font-weight: 700;
+  color: #3b3f45;
   margin-bottom: 18px;
 }
-.avatars { display: flex; }
-.avatars .badge { margin-right: -5px; border: 1.5px solid #fff; width: 20px; height: 20px; }
+.sourcepill .src { display: inline-flex; align-items: center; gap: 6px; }
+.sourcepill .count { color: var(--muted); font-weight: 500; }
 .article h1 { font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.6px; margin: 0 0 6px; }
 .article h3 { font-size: 17px; font-weight: 800; margin: 26px 0 10px; }
 .article p { font-size: 15px; line-height: 1.75; color: #2e3238; margin: 0 0 12px; }

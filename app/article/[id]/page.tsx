@@ -7,14 +7,6 @@ import type { Analysis } from "@/lib/ai";
 
 export const revalidate = 600;
 
-function Badge({ source, big = false }: { source: string; big?: boolean }) {
-  return (
-    <span className="badge" style={{ background: accentOf(source), width: big ? 20 : 16, height: big ? 20 : 16 }}>
-      {source.slice(0, 1)}
-    </span>
-  );
-}
-
 export default async function ArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -51,12 +43,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
       <article className="article">
         <div className="sourcepill">
-          <span className="avatars">
-            {uniqueSources.map((s) => (
-              <Badge key={s} source={s} big />
-            ))}
-          </span>
-          {sources.length} 출처
+          {uniqueSources.map((s) => (
+            <span key={s} className="src">
+              <span className="dot" style={{ background: accentOf(s) }} />
+              {s}
+            </span>
+          ))}
+          <span className="count">출처 {sources.length}건</span>
         </div>
 
         <h1>{article.titleKo}</h1>
